@@ -41,13 +41,14 @@ public class App
 	        if (jmeterHome.exists()) {
 	            File jmeterProperties = new File(jmeterHome.getPath() + slash + "bin" + slash + "jmeter.properties");
 	            if (jmeterProperties.exists()) {
+	            	
 	                //JMeter Engine
 	                StandardJMeterEngine jmeter = new StandardJMeterEngine();
 
 	                //JMeter initialization (properties, log levels, locale, etc)
 	                JMeterUtils.setJMeterHome(jmeterHome.getPath());
 	                JMeterUtils.loadJMeterProperties(jmeterProperties.getPath());
-	                JMeterUtils.initLogging();// you can comment this line out to see extra log messages of i.e. DEBUG level
+	                JMeterUtils.initLogging(); // you can comment this line out to see extra log messages of i.e. DEBUG level
 	                JMeterUtils.initLocale();
 
 	                // JMeter Test Plan
@@ -92,11 +93,11 @@ public class App
 	                HashTree threadGroupHashTree = testPlanTree.add(testPlan, threadGroup);
 	                threadGroupHashTree.add(examplecomSampler);
 
-	                // save generated test plan to JMeter's .jmx file format
+	                // JMeter's .jmx file format
 	                SaveService.saveTree(testPlanTree, new FileOutputStream("G:\\Organization\\Leanings\\Jmeter Reports\\jmeter_api_sample.jmx"));
 
-	                //add Summarizer output to get test progress in stdout like:
-	                // summary =      2 in   1.3s =    1.5/s Avg:   631 Min:   290 Max:   973 Err:     0 (0.00%)
+	                //add Summarizer output
+	                
 	                Summariser summer = null;
 	                String summariserName = JMeterUtils.getPropDefault("summariser.name", "summary");
 	                if (summariserName.length() > 0) {
@@ -104,7 +105,7 @@ public class App
 	                }
 
 
-	                // Store execution results into a .jtl file, we can save file as csv also
+	                // Store execution results
 	                String reportFile = "G:\\Organization\\Leanings\\Jmeter Reports\\report.jtl";
 	                String csvFile = "G:\\Organization\\Leanings\\Jmeter Reports\\report.csv";
 	                ResultCollector logger = new ResultCollector(summer);
